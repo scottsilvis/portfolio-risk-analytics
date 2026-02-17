@@ -176,48 +176,38 @@ portfolio-risk-analytics/
 │
 └── tests/
 ```
+---
 
 ## Running the Project Locally
 
-Create a local database (PostgreSQL or SQL Server Express)
+1. Create a local database (PostgreSQL or SQL Server Express)
+2. Copy .env.example to .env and configure connection details
+3. Run database schema scripts in /sql
+4. Execute the Python pipeline:
+   ```
+   python src/portfolio_analytics/orchestration/run_pipeline.py
+   ```
+5. Open the Power BI .pbix file and refresh the dataset
 
-Copy .env.example to .env and configure connection details
+---
 
-Run database schema scripts in /sql
-
-Execute the Python pipeline:
-
-python src/portfolio_analytics/orchestration/run_pipeline.py
-
-
-Open the Power BI .pbix file and refresh the dataset
-
-Design Philosophy
+## Design Philosophy
 
 This project intentionally emphasizes:
+- Reproducibility over realism
+- Clear data contracts between pipeline stages
+- Separation of concerns (generation, transformation, analytics)
+- Business-aligned metrics, not academic finance complexity
 
-Reproducibility over realism
+The result is a project that mirrors how analytics engineering work is performed in production environments without unnecessary tooling or infrastructure overhead.
 
-Clear data contracts between pipeline stages
+---
 
-Separation of concerns (generation, transformation, analytics)
+## Possible Extensions
 
-Business-aligned metrics, not academic finance complexity
+- Benchmark index comparison
+- Multi-currency portfolios
+- More advanced performance attribution
+- Deployment to a cloud data warehouse
+- Automated scheduling and CI validation
 
-The result is a project that mirrors how analytics engineering work is performed in production environments—without unnecessary tooling or infrastructure overhead.
-
-Possible Extensions
-
-Benchmark index comparison
-
-Multi-currency portfolios
-
-More advanced performance attribution
-
-Deployment to a cloud data warehouse
-
-Automated scheduling and CI validation
-
-License
-
-This project is provided for educational and portfolio purposes.
