@@ -1,0 +1,17 @@
+project:
+  seed: 42
+  start_date: "2023-01-01"
+  end_date: "2025-12-31"
+  business_days_only: true
+
+scale:
+  n_accounts: 10
+  portfolios_per_account_min: 2
+  portfolios_per_account_max: 3
+  n_assets_ex_cash: 60
+  avg_assets_per_portfolio: 20
+
+notes:
+  cash_asset_id: "CASH0001"
+  cash_sign_convention: "cash_impact > 0 increases cash; < 0 decreases cash"
+  file_format: "CSV (parquet engine not available in this runtime)"

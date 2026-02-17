@@ -1,0 +1,11 @@
+account_id,account_name,account_type,risk_profile,base_currency,open_date
+ACC0001,Account 1,Taxable,Moderate,USD,2023-03-13
+ACC0002,Account 2,Traditional IRA,Conservative,USD,2023-02-24
+ACC0003,Account 3,Taxable,Conservative,USD,2023-03-17
+ACC0004,Account 4,Taxable,Aggressive,USD,2023-02-13
+ACC0005,Account 5,Traditional IRA,Moderate,USD,2023-03-02
+ACC0006,Account 6,Trust,Aggressive,USD,2023-01-25
+ACC0007,Account 7,Trust,Moderate,USD,2023-03-22
+ACC0008,Account 8,Taxable,Aggressive,USD,2023-02-22
+ACC0009,Account 9,Traditional IRA,Moderate,USD,2023-03-07
+ACC0010,Account 10,Traditional IRA,Aggressive,USD,2023-02-08

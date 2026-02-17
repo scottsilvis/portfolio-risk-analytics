@@ -1,0 +1,62 @@
+asset_id,ticker,asset_name,asset_class,sector,region,risk_factor,duration_years,is_active
+AST0001,RLLW,RLLW Fixed Income Bond,Bond,Fixed Income,US,0.367,8.21,True
+AST0002,FCN,FCN Fixed Income Bond,Bond,Fixed Income,IntlDev,0.291,9.42,True
+AST0003,ZSUN,ZSUN Energy Equity,Equity,Energy,IntlDev,1.164,,True
+AST0004,DNJ,DNJ Consumer REIT,REIT,Consumer,US,1.273,,True
+AST0005,UQKV,UQKV Materials Equity,Equity,Materials,US,0.932,,True
+AST0006,LFC,LFC Tech Equity,Equity,Tech,US,1.116,,True
+AST0007,OWV,OWV Industrials Equity,Equity,Industrials,IntlDev,1.063,,True
+AST0008,ETS,ETS Materials Equity,Equity,Materials,US,0.977,,True
+AST0009,JLXR,JLXR Fixed Income Bond,Bond,Fixed Income,US,0.354,5.25,True
+AST0010,UJM,UJM Fixed Income Bond,Bond,Fixed Income,US,0.485,2.71,True
+AST0011,OET,OET Financials Equity,Equity,Financials,US,1.088,,True
+AST0012,RJZK,RJZK Energy Commodity,Commodity,Energy,US,0.863,,True
+AST0013,IBM,IBM Industrials Equity,Equity,Industrials,US,0.408,,True
+AST0014,MDR,MDR Consumer Equity,Equity,Consumer,IntlDev,0.991,,True
+AST0015,MOR,MOR Energy Equity,Equity,Energy,US,1.094,,True
+AST0016,EVQ,EVQ Financials REIT,REIT,Financials,US,0.997,,True
+AST0017,STV,STV Materials Equity,Equity,Materials,US,0.957,,True
+AST0018,VKXH,VKXH Consumer Equity,Equity,Consumer,IntlDev,0.611,,True
+AST0019,QDV,QDV Financials Equity,Equity,Financials,IntlDev,1.132,,True
+AST0020,FUU,FUU Metals Commodity,Commodity,Metals,US,1.132,,True
+AST0021,MSH,MSH Materials REIT,REIT,Materials,US,1.027,,True
+AST0022,UNO,UNO Fixed Income Bond,Bond,Fixed Income,US,0.459,6.6,True
+AST0023,GCL,GCL Industrials REIT,REIT,Industrials,US,0.738,,True
+AST0024,RWO,RWO Tech REIT,REIT,Tech,IntlDev,0.925,,True
+AST0025,OQOO,OQOO Consumer Equity,Equity,Consumer,US,0.787,,True
+AST0026,UHP,UHP Consumer Equity,Equity,Consumer,US,0.966,,True
+AST0027,AZF,AZF Fixed Income Bond,Bond,Fixed Income,IntlDev,0.493,4.43,True
+AST0028,ZWA,ZWA Fixed Income Bond,Bond,Fixed Income,IntlDev,0.365,5.82,True
+AST0029,GWH,GWH Health Care Equity,Equity,Health Care,US,1.483,,True
+AST0030,LRD,LRD Energy Equity,Equity,Energy,US,1.344,,True
+AST0031,OZRK,OZRK Fixed Income Bond,Bond,Fixed Income,IntlDev,0.487,5.36,True
+AST0032,KIEI,KIEI Utilities Equity,Equity,Utilities,US,1.486,,True
+AST0033,AUS,AUS Tech REIT,REIT,Tech,US,1.118,,True
+AST0034,SEX,SEX Energy Equity,Equity,Energy,US,1.257,,True
+AST0035,NMS,NMS Health Care Equity,Equity,Health Care,US,0.976,,True
+AST0036,EJG,EJG Fixed Income Bond,Bond,Fixed Income,US,0.267,6.2,True
+AST0037,HPJ,HPJ Energy Equity,Equity,Energy,US,0.876,,True
+AST0038,IDI,IDI Industrials Equity,Equity,Industrials,US,1.297,,True
+AST0039,ZMSL,ZMSL Tech Equity,Equity,Tech,US,0.755,,True
+AST0040,GGUG,GGUG Materials REIT,REIT,Materials,US,0.972,,True
+AST0041,STH,STH Health Care Equity,Equity,Health Care,US,1.002,,True
+AST0042,LXD,LXD Consumer Equity,Equity,Consumer,US,1.343,,True
+AST0043,LSH,LSH Fixed Income Bond,Bond,Fixed Income,US,0.3,8.84,True
+AST0044,OEM,OEM Energy Commodity,Commodity,Energy,IntlDev,0.98,,True
+AST0045,WMSR,WMSR Materials Equity,Equity,Materials,IntlDev,1.233,,True
+AST0046,LDP,LDP Energy Equity,Equity,Energy,US,0.657,,True
+AST0047,QCT,QCT Utilities Equity,Equity,Utilities,US,1.033,,True
+AST0048,KEM,KEM Industrials Equity,Equity,Industrials,US,0.757,,True
+AST0049,RDR,RDR Industrials Equity,Equity,Industrials,US,0.92,,True
+AST0050,CUE,CUE Fixed Income Bond,Bond,Fixed Income,IntlDev,0.294,5.09,True
+AST0051,ZPLJ,ZPLJ Energy Equity,Equity,Energy,US,1.209,,True
+AST0052,HAD,HAD Utilities Equity,Equity,Utilities,US,0.875,,True
+AST0053,YMU,YMU Fixed Income Bond,Bond,Fixed Income,IntlDev,0.441,1.56,True
+AST0054,HMR,HMR Utilities Equity,Equity,Utilities,US,1.058,,True
+AST0055,MEOO,MEOO Tech Equity,Equity,Tech,US,0.746,,True
+AST0056,MYI,MYI Fixed Income Bond,Bond,Fixed Income,IntlDev,0.517,6.57,True
+AST0057,WLH,WLH Fixed Income Bond,Bond,Fixed Income,US,0.381,9.35,True
+AST0058,AAXO,AAXO Fixed Income Bond,Bond,Fixed Income,US,0.54,6.46,True
+AST0059,DIC,DIC Energy Equity,Equity,Energy,US,1.202,,True
+AST0060,DHG,DHG Tech Equity,Equity,Tech,EM,0.477,,True
+CASH0001,CASH,Cash (USD),Cash,Cash,US,0.0,,True

@@ -153,6 +153,17 @@ portfolio-risk-analytics/
 ├── config/
 │   └── config.yaml
 │
+├── data/
+│   └── raw/
+│       ├── dim_date.csv
+│       ├── dim_account.csv
+│       ├── dim_portfolio.csv
+│       ├── dim_asset.csv
+│       ├── fact_price_daily.csv
+│       ├── fact_transaction.csv
+│       ├── fact_holding_daily.csv
+│       └── fact_portfolio_daily.csv
+│
 ├── sql/
 │   ├── 00_create_db.sql
 │   ├── 01_schema_core.sql
