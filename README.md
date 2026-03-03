@@ -155,14 +155,14 @@ portfolio-risk-analytics/
 │
 ├── data/
 │   └── raw/
-│       ├── dim_date.csv
-│       ├── dim_account.csv
-│       ├── dim_portfolio.csv
-│       ├── dim_asset.csv
-│       ├── fact_price_daily.csv
-│       ├── fact_transaction.csv
-│       ├── fact_holding_daily.csv
-│       └── fact_portfolio_daily.csv
+│       ├── dim_date.csv                  #ignored
+│       ├── dim_account.csv               #ignored
+│       ├── dim_portfolio.csv             #ignored
+│       ├── dim_asset.csv                 #ignored
+│       ├── fact_price_daily.csv          #ignored
+│       ├── fact_transaction.csv          #ignored
+│       ├── fact_holding_daily.csv        #ignored
+│       └── fact_portfolio_daily.csv      #ignored
 │
 ├── sql/
 │   ├── 00_create_db.sql
