@@ -61,7 +61,20 @@ message("connected to SQLite: ", db_path)
   
 # NOTE: This drops existing tables if you rerun.
 
-for (t in stg_tables) dbExecute(conn, paste0("DROP TABLE IF EXISTS ", t, ";"))
+drop_order <- c(
+  "stg_fact_holding_daily",
+  "stg_fact_transaction",
+  "stg_fact_price_daily",
+  "stg_fact_portfolio_daily",
+  "stg_dim_portfolio",
+  "stg_dim_asset",
+  "stg_dim_account",
+  "stg_dim_date"
+)
+
+for (t in drop_order) {
+  dbExecute(conn, paste0("DROP TABLE IF EXISTS ", t, ";"))
+}
 
 stopifnot(all(file.exists(schema_paths)))
 for (p in schema_paths) {
@@ -74,7 +87,6 @@ message("schema created. tables: ", paste(dbListTables(conn), collapse = ", "))
 
 # ---- Load data ----
   
-# Sites first (patients references sites; visits references both)
 
 for (tbl in data_tables) {
   message("Loading: ", tbl, " from ", file_names[[tbl]])
