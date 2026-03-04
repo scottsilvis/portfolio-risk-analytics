@@ -1,5 +1,5 @@
 -- SQLite staging schema (uses table name prefixes instead of schemas)
-CREATE TABLE stg_dim_date (
+CREATE TABLE dim_date (
   date_key        INTEGER PRIMARY KEY,
   date            TEXT NOT NULL,         -- ISO date: YYYY-MM-DD
   year            INTEGER NOT NULL,

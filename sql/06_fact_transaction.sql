@@ -1,5 +1,5 @@
 -- SQLite staging schemas
-CREATE TABLE stg_fact_transaction (
+CREATE TABLE fact_transaction (
   transaction_id   TEXT PRIMARY KEY,
   trade_date_key   INTEGER NOT NULL,
   portfolio_id     TEXT NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE stg_fact_transaction (
   net_amount       REAL NOT NULL,
   cash_impact      REAL NOT NULL,
   notes            TEXT,
-  FOREIGN KEY (trade_date_key) REFERENCES stg_dim_date (date_key),
-  FOREIGN KEY (portfolio_id) REFERENCES stg_dim_portfolio (portfolio_id),
-  FOREIGN KEY (asset_id) REFERENCES stg_dim_asset (asset_id)
+  FOREIGN KEY (trade_date_key) REFERENCES dim_date (date_key),
+  FOREIGN KEY (portfolio_id) REFERENCES dim_portfolio (portfolio_id),
+  FOREIGN KEY (asset_id) REFERENCES dim_asset (asset_id)
 );

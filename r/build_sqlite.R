@@ -1,95 +1,105 @@
+# Load raw CSVs into SQLite and apply schema.
+
 library(DBI)
 library(RSQLite)
+library(readr)
 
-RAW_DIR <- "data/raw"
-DB_PATH <- "data/warehouse/portfolio_analytics.db"
-DDL_PATH <- "sql/01_schema_staging.sql"
+stopifnot(
+  dir.exists("sql"),
+  dir.exists("data")
+)
+message("Working directory: ", getwd())
+message("Folders /sql and /data found")
 
-TABLES <- data.frame(
-  table = c(
-    "stg_dim_date",
-    "stg_dim_account",
-    "stg_dim_portfolio",
-    "stg_dim_asset",
-    "stg_fact_price_daily",
-    "stg_fact_transaction",
-    "stg_fact_holding_daily",
-    "stg_fact_portfolio_daily"
-  ),
-  file = c(
-    "dim_date.csv",
-    "dim_account.csv",
-    "dim_portfolio.csv",
-    "dim_asset.csv",
-    "fact_price_daily.csv",
-    "fact_transaction.csv",
-    "fact_holding_daily.csv",
-    "fact_portfolio_daily.csv"
-  ),
-  stringsAsFactors = FALSE
+# ---- Paths ----
+
+data_tables <- c(
+  "dim_date",
+  "dim_account",
+  "dim_portfolio",
+  "dim_asset",
+  "fact_price_daily",
+  "fact_transaction",
+  "fact_holding_daily",
+  "fact_portfolio_daily"
 )
 
-build_db <- function() {
-  dir.create(dirname(DB_PATH), recursive = TRUE, showWarnings = FALSE)
+schema_files <- c(data_tables, "idx_price_asset", "idx_holdings_portfolio")
 
-  # validate files exist
-  missing <- TABLES$file[!file.exists(file.path(RAW_DIR, TABLES$file))]
-  if (length(missing) > 0) stop("Missing files in ", RAW_DIR, ": ", paste(missing, collapse = ", "))
+schema_paths <- paste0(
+    "sql/", 
+    sprintf("%02d_", seq_along(schema_files)),  
+    schema_files, 
+    ".sql"
+  )
 
-  con <- dbConnect(RSQLite::SQLite(), DB_PATH)
-  on.exit(dbDisconnect(con), add = TRUE)
+db_path <- "data/warehouse/portfolio_analytics.db"
 
-  dbExecute(con, "PRAGMA foreign_keys = ON;")
+data_dir <- file.path("data/raw/")  
 
-  # run schema
-  ddl_lines <- readLines(DDL_PATH, warn = FALSE)
-  ddl <- paste(ddl_lines, collapse = "\n")
+file_names <- setNames(
+  paste0(data_dir, "/", data_tables, ".csv"),
+  data_tables
+)
 
-  stmts <- strsplit(ddl, ";", fixed = TRUE)[[1]]
-  stmts <- trimws(stmts)
-  stmts <- stmts[stmts != ""]
+message("paths created")
 
-  for (s in stmts) {
-    dbExecute(con, paste0(s, ";"))
-  }
+stopifnot(all(file.exists(schema_paths)))
+stopifnot(all(file.exists(unlist(file_names))))
 
-  #Boolean Normalizer
-  to01 <- function(x) {
-    x <- trimws(tolower(as.character(x)))
-    ifelse(x %in% c("1", "true", "t", "yes", "y"), 1L,
-          ifelse(x %in% c("0", "false", "f", "no", "n"), 0L, NA_integer_))
-  }
+message("paths validated")
+# ---- Connect ----
+  
+conn <- dbConnect(RSQLite::SQLite(), db_path)
+dbExecute(conn, "PRAGMA foreign_keys = ON;")
+message("connected to SQLite: ", db_path)
 
-  # load each CSV (clear then append to preserve constraints)
-  for (i in seq_len(nrow(TABLES))) {
-    tbl <- TABLES$table[i]
-    f   <- file.path(RAW_DIR, TABLES$file[i])
+# ---- create schema ----
+  
+# NOTE: This drops existing tables if you rerun.
 
-    df <- read.csv(f, stringsAsFactors = FALSE)
+drop_order <- c(
+  "fact_holding_daily",
+  "fact_transaction",
+  "fact_price_daily",
+  "fact_portfolio_daily",
+  "dim_portfolio",
+  "dim_asset",
+  "dim_account",
+  "dim_date"
+)
 
-    # normalize boolean-ish columns
-    if (tbl == "stg_dim_date") {
-      df$is_business_day <- to01(df$is_business_day)
-      df$is_month_end <- to01(df$is_month_end)
-    }
-    if (tbl == "stg_dim_asset") {
-      df$is_active <- to01(df$is_active)
-    }
+for (t in drop_order) {
+  dbExecute(conn, paste0("DROP TABLE IF EXISTS ", t, ";"))
+}
 
-    dbExecute(con, paste0("DELETE FROM ", tbl, ";"))
-    dbWriteTable(con, tbl, df, append = TRUE)
+stopifnot(all(file.exists(schema_paths)))
+for (p in schema_paths) {
+  message("Applying schema: ", p)
+  sql <- paste(readLines(p, warn = FALSE), collapse = "\n")
+  dbExecute(conn, sql)
+} 
 
-    cat("Loaded", basename(f), "->", tbl, "(", nrow(df), "rows)\n")
-  }
+message("schema created. tables: ", paste(dbListTables(conn), collapse = ", "))
 
-  # row counts
-  cat("\nRow counts:\n")
-  for (tbl in TABLES$table) {
-    cnt <- dbGetQuery(con, paste0("SELECT COUNT(*) AS n FROM ", tbl, ";"))$n[1]
-    cat(sprintf("  %-26s %s\n", tbl, format(cnt, big.mark=",")))
-  }
+# ---- Load data ----
+  
 
-  cat("\nSQLite DB ready:", DB_PATH, "\n")
-  }
+for (tbl in data_tables) {
+  message("Loading: ", tbl, " from ", file_names[[tbl]])
+  df <- read_csv(file_names[[tbl]], show_col_types = FALSE)
+  dbWriteTable(conn, tbl, df, append = TRUE)
+}
 
-build_db()
+message("data loaded")
+
+# ---- Basic verification ----
+  
+row_counts <- sapply(names(file_names), function(tbl) {
+  dbGetQuery(conn, paste0("SELECT COUNT(*) AS n FROM ", tbl, ";"))$n
+})
+message("raw counts: ")
+print(row_counts)
+
+dbDisconnect(conn)
+message('Done. SQLite DB created at: ', db_path)

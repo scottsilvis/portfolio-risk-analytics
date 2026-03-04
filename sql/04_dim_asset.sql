@@ -1,5 +1,5 @@
 -- SQLite staging schema
-CREATE TABLE stg_dim_asset (
+CREATE TABLE dim_asset (
   asset_id        TEXT PRIMARY KEY,
   ticker          TEXT NOT NULL,
   asset_name      TEXT NOT NULL,
