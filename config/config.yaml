@@ -1,5 +1,4 @@
-
-project:
+simulation:
   seed: 42
   start_date: "2023-01-01"
   end_date: "2025-12-31"
@@ -12,8 +11,11 @@ scale:
   n_assets_ex_cash: 60
   avg_assets_per_portfolio: 20
 
-notes:
+rules:
   cash_asset_id: "CASH0001"
-  cash_sign_convention: "cash_impact > 0 increases cash; < 0 decreases cash"
+  cash_sign_convention: "cash_impact > 0 increases cash"
 
-file_format: "CSV (parquet engine not available in this runtime)"
+database:
+  path: "data/warehouse/portfolio_analytics.db"
+
+file_format: "csv"
